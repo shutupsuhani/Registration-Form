@@ -1,7 +1,6 @@
 {
   "name": "register",
   "version": "0.1.0",
-  "homepage": "https://shutupsuhani.github.io/Registration-Form",
   "private": true,
   "dependencies": {
     "axios": "^1.6.2",
