@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import "./register.css"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import {Link} from "react-router-dom";
+
 
 
 export default function Register() {
@@ -11,42 +11,46 @@ export default function Register() {
     const email=useRef();
     const studentNo=useRef();
     const Branch=useRef();
-
+     const navigate = useNavigate();
     const [error, setError] = useState({});
 
-    const handleClick = async (e) => {
-        e.preventDefault();
-        setError(null); // Clear previous errors
-    
-        const user = {
-            name:name.current.value,
-            email:email.current.value,
-            studentNo:studentNo.current.value,
-            Branch:Branch.current.value
 
+const handleClick = async (e) => {
+    e.preventDefault();
+    console.log('handleClick called');
+    setError(null); // Clear previous errors
+  
+    const user = {
+      name: name.current.value,
+      email: email.current.value,
+      studentNo: studentNo.current.value,
+      Branch: Branch.current.value,
+    };
+  
+    try {
+      console.log('About to send POST request:', user);
+      await axios.post("/users/register", user);
+      console.log('POST request successful');
+      alert("Successfully Registered");
+      //redirecting to homepage
+      navigate('/');
+    } catch (err) {
+      console.error('Error during registration:', err);
+  
+      if (err.response && err.response.status === 400) {
+        console.log('Error response:', err.response.data);
+        if (err.response.data === "already registered") {
+          alert("already registered");
+          navigate('/');
+        } else {
+          alert("Registration failed. Please try again later.");
         }
-    
-        try {
-            await axios.post("/users/register", user);
-          } catch (err) {
-            console.error(err);
-    
-            if (err.response && err.response.status === 400) {
-                console.log(err.response.data);  // Log the entire error response
-                if (err.response.data.error === 'already registered') {
-                  alert('already registered');
-                } else {
-                  alert('Successfully Registered');
-                }
-              } else {
-                alert('An unexpected error occurred. Please try again.');
-              }
-        }
-
-
-        
-        
-};
+      } else {
+        alert("An unexpected error occurred. Please try again.");
+      }
+    }
+  };
+  
 
 
     return(
@@ -67,9 +71,9 @@ export default function Register() {
                <label>Branch:</label>
                <input type="text" required placeholder="Branch" ref={Branch} className="inputData"/>
              
-             <Link to="/">
+    
                <button className="submitButton" type="submit">Submit</button>
-               </Link>
+               
 
              </form>
     
