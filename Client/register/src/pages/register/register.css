@@ -5,7 +5,7 @@
     margin-top: 50px;
     padding: 20px;
     background-color: white;
-    
+    border-radius: 10px;
     box-shadow: 10px 10px 5px 0px rgba(35, 241, 231, 0.75);
 -webkit-box-shadow: 10px 10px 5px 0px rgba(43, 223, 205, 0.75);
 -moz-box-shadow: 10px 10px 5px 0px rgba(46, 162, 240, 0.75);
