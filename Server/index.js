@@ -23,7 +23,13 @@ db.once('open', function() {
     console.log("Connected to MongoDB");
 });
 
-app.use(cors());
+app.use(cors(
+    {
+        origin:["https://register-form-server.vercel.app"],
+        methods:["POST","GET"],
+        credentials:true
+    }
+));
 
 //middlewares
 app.use(express.json());
