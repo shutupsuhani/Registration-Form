@@ -40,6 +40,6 @@ app.use(morgan("common"));
 app.use("/users", userRoute );
 
 app.listen(8800, () => {
-    console.log("Backend Server is running!");
+    console.log("Backend Server is running on PORT 8800!");
 }); 
 
